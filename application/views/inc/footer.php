@@ -79,6 +79,7 @@
 <script src="<?= base_url() ?>js/script.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>js/jquery.multi-select.min.js" type="text/javascript"></script>
 
 
 

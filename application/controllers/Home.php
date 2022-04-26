@@ -11,11 +11,12 @@ class Home extends CI_Controller
 
 		
 		$this->load->helper('file');
-		$dataArrayLocations = read_file('api/data.txt');
+		$dataArray = read_file('api/data.txt');
 		
-		$dataArrayLocations = json_decode($dataArrayLocations,true);
+		$dataArrayLocations = json_decode($dataArray,true);
 		
 		$this->session->set_userdata('dataArrayLocations', $dataArrayLocations);
+        $this->session->set_userdata('dataArray', $dataArray);
 		
 		
     }
@@ -61,10 +62,10 @@ class Home extends CI_Controller
         $data['step'] = 2;
 		*/
 		
-        $this->load->helper('file');
-		$filedata = read_file('api/data.txt');
+        //$this->load->helper('file');
+		//$filedata = read_file('api/data.txt');
 		
-		$data['filedata'] = $filedata;//json_decode($filedata,true);
+		//$data['filedata'] = $filedata;//json_decode($filedata,true);
 
         $data['main_content'] = 'textview';
         $this->load->view('layout', $data);

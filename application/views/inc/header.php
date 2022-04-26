@@ -14,7 +14,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="<?= base_url() ?>css/bootstrap.css" rel="stylesheet" type="text/css">
-
+    <link href="<?= base_url() ?>css/multiselect-styles.css" rel="stylesheet" type="text/css">
 
 
 

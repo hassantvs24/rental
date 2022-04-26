@@ -14,3 +14,5 @@ if (!defined('BASEPATH'))
 <?php $this->load->view('inc/footer'); ?>
 
 <?php if(!isset($_GET['script'])) { $this->load->view('inc/website-footer'); } ?>
+
+
