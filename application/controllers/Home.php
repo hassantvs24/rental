@@ -707,12 +707,7 @@ class Home extends CI_Controller
 		$data['unit_id_input'] = $_POST['unit_id_input'];
 		$formatted_date = date('Y-m-d', strtotime($data['date'])) . 'T' . date('H:i:s', strtotime($data['date']));
 		
-		
-		
-		
-		
-		
-		
+
 		$tenant_data['lo_code'] = $data['location_code'];
 		$tenant_data['first_name'] = $data['first_name'];
 		$tenant_data['last_name'] = $data['last_name'];
@@ -739,9 +734,7 @@ class Home extends CI_Controller
 		    $tenantID = $this->session->tenant;
 		}
 		
-		
-		
-		
+
 		$reservation_data['lo_code'] = $data['location_code'];
 		$reservation_data['tenant_id'] = $tenantID;
 		$reservation_data['unit_id'] = $data['unit_id_input'];
