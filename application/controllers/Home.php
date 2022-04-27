@@ -16,7 +16,7 @@ class Home extends CI_Controller
 		$dataArrayLocations = json_decode($dataArray,true);
 		
 		$this->session->set_userdata('dataArrayLocations', $dataArrayLocations);
-        $this->session->set_userdata('dataArray', $dataArray);
+        $this->session->set_userdata('dataArray', $dataArray);//nazmul
 		
 		
     }
@@ -61,11 +61,6 @@ class Home extends CI_Controller
 		$data['unitsExtra'] = $this->sitelink->get_more_unit_info($this->session->lo_code);
         $data['step'] = 2;
 		*/
-		
-        //$this->load->helper('file');
-		//$filedata = read_file('api/data.txt');
-		
-		//$data['filedata'] = $filedata;//json_decode($filedata,true);
 
         $data['main_content'] = 'textview';
         $this->load->view('layout', $data);
