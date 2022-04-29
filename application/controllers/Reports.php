@@ -20,10 +20,26 @@ class Reports extends CI_Controller
 
     public function index()
     {
+        //$this->load->helper(array('form', 'url'));
+        //$this->load->library('form_validation');
+       // $this->form_validation->set_rules('date_rng', 'Date Range', 'required|min_length[10]|max_length[10]|');
+
+        if ($this->session->userdata('auth') != 'Success') {
+            redirect('/access');
+        }
+
         $reservations = $this->file_data;
 
-        $rangeStart = date('Y-m-d H:i:s', strtotime('2022-04-01 00:00:00'));
-        $rangeEnd = date('Y-m-d H:i:s', strtotime('2022-04-01 23:59:59'));
+        $rangeStart = date('Y-m-d').' 00:00:00';
+        $rangeEnd = date('Y-m-d').' 23:59:59';
+
+        if ($this->input->get('date_rng') != '') {
+            $date_rngs = $this->input->get('date_rng');
+            $date_rng = explode(" - ",$date_rngs);
+
+            $rangeStart = date('Y-m-d H:i:s', strtotime($date_rng[0].' 00:00:00'));
+            $rangeEnd = date('Y-m-d H:i:s', strtotime($date_rng[1].' 23:59:59'));
+        }
 
         $reserved = [];
         foreach ($reservations as $loc => $reservation){
@@ -45,16 +61,40 @@ class Reports extends CI_Controller
         }
 
         arsort($reserved);
-        echo json_encode($reserved);
 
+        //echo json_encode($reserved);
+
+        $data['table'] = $reserved;
+        $data['title'] = 'Reports';
+        $data['main_content'] = 'admin/reports';
+
+        $this->load->view('admin/layout', $data);
+    }
+
+    public function access()
+    {
+        $data['title'] = 'Reports Access';
+        $this->load->view('admin/access', $data);
 
     }
 
-    public function locations()
+    public function access_auth()
     {
-        //$data = $this->file_data['location'];
-        //echo json_encode($data);
+        $password = $this->input->post('password');
 
+        if ($password == '12345678') {
+            $this->session->set_userdata(['auth' => 'Success']);
+            redirect('/reports');
+        }else{
+            $this->session->set_flashdata('access', 'Wrong Password');
+            redirect('/access');
+        }
+
+    }
+
+    public function admin_logout(){
+        $this->session->unset_userdata('auth');
+        redirect('/access');
     }
 
 

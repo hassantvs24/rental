@@ -78,4 +78,6 @@ $route['wlocation'] = 'Development/write_location';//Nazmul
 $route['textview'] = 'home/textview';
 
 $route['reports'] = 'reports';
-$route['locations'] = 'reports/locations';
+$route['access'] = 'reports/access';
+$route['access_auth'] = 'reports/access_auth';
+$route['admin_logout'] = 'reports/admin_logout';
