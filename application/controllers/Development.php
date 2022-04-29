@@ -653,7 +653,9 @@ class Development extends CI_Controller
         if ( !write_file('api/reservation.json', json_encode($locData))){
             echo 'Unable to write the file';
         }else{
-            echo 'Successfully write the file';
+            $this->session->set_flashdata('sync', 'Successfully Sync');
+            redirect('/reports');
+
         }
 
 

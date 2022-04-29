@@ -43,6 +43,9 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="btn btn-success" href="<?= site_url('/wlocation') ?>" role="button">
+                Sync Data
+            </a>
             <a class="btn btn-danger" href="<?= site_url('/admin_logout') ?>" role="button">
                 Logout
             </a>

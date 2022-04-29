@@ -23,7 +23,9 @@
                         </form>
 
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <p class="text-success"><?= $this->session->flashdata('sync') ?></p>
+                    </div>
                 </div>
 
             </div>
