@@ -140,7 +140,6 @@ public function get_states_new()
 
 
 
-
     public function get_card_types()
     {
         return array('' => 'Select Card Type', 5 => 'Master Card', 6 => 'VISA', 7 => 'American Express');

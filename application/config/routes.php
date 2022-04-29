@@ -74,4 +74,8 @@ $route['locationstest'] = 'Development/locationstest';
 $route['updatedatatest'] = 'Development/updatedatatest';
 $route['map'] = 'Development/map';
 $route['nearestlocation'] = 'Development/nearestlocation';
+$route['wlocation'] = 'Development/write_location';//Nazmul
 $route['textview'] = 'home/textview';
+
+$route['reports'] = 'reports';
+$route['locations'] = 'reports/locations';

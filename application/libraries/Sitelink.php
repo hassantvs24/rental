@@ -261,6 +261,29 @@ class Sitelink
         }
     }
 
+    public function reservation_list($lo_code)
+    {
+        $this->params->sLocationCode = $lo_code;
+
+        try {
+            $reservation_fees = array();
+            $data = $this->client->ReservationFeeRetrieve($this->params);
+            $result = $data->ReservationFeeRetrieveResult;
+            $xml_data = new SimpleXMLElement($result->any);
+            $xml_data_table = $xml_data->NewDataSet->Table;
+            if (count($xml_data_table) > 0) {
+                foreach ($xml_data_table as $reservation_fee) {
+                    $reservation_fees[] = $this->xml2array($reservation_fee);
+                }
+                return $reservation_fees;
+            } else {
+                return FALSE;
+            }
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage() . '<br />' . $e);
+        }
+    }
+
     public function add_reservation($reservation_data = array())
     {
         $this->params->sLocationCode = $reservation_data['lo_code'];
@@ -726,7 +749,7 @@ class Sitelink
 	
 	
 	public function account_list($email) {
-	    
+
 	    $this->params->sEmailAddress = $email;
 	    
 	    $data = $this->client->TenantListDetailed_v2($this->params);
@@ -735,18 +758,19 @@ class Sitelink
 		$xml = $xml_data->NewDataSet;
 	    return $xml;  
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+    public function reservations_list($loc) {
+
+        $this->params->sLocationCode = $loc;
+        $this->params->iGlobalWaitingNum = -999;
+
+        $data = $this->client->ReservationList($this->params);
+        $result = $data->ReservationListResult;
+        $xml_data = new SimpleXMLElement($result->any);
+        $xml = $xml_data->NewDataSet;
+        return $xml;
+    }
 	
 
 }

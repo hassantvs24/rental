@@ -7,7 +7,8 @@ class Development extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-		
+        $this->load->library('sitelink');
+        $this->load->helper('file');
 
 
     }
@@ -19,7 +20,7 @@ class Development extends CI_Controller
 	
 	public function locations()
     {
-		$this->load->helper('file');
+
 		$data['filedata'] = read_file('api/data.txt');
 		
 		$data['filedata'] = json_decode($data['filedata'],true);
@@ -379,8 +380,7 @@ class Development extends CI_Controller
 	public function updatedatatest()
     {	
 		
-		$this->load->library('sitelink');
-		$this->load->helper('file');
+
 		
 		
 		$locInfo['DataUpdateInfo'] = array(
@@ -627,7 +627,82 @@ class Development extends CI_Controller
 		$data['main_content'] = 'locations';
         $this->load->view('locationstest', $data);
 	}
-	
+
+    /**
+     * Nazmul
+     */
+	public function write_location(){
+
+        $file_datas = read_file('api/data.txt');
+        $file_data = json_decode($file_datas, true);
+
+        $data = $file_data['location'];
+
+        $locData = [];
+        foreach ($data as $loc => $locval){
+
+            $items = (array)$this->sitelink->reservations_list($loc);
+            $arr_item = array();
+            foreach ($items as $item){
+                array_push($arr_item, (array)$item);
+            }
+            $locData[$loc]['name'] = $locval['SiteName'];
+            $locData[$loc]['reserve_data'] = $arr_item[0];
+        }
+
+        if ( !write_file('api/reservation.json', json_encode($locData))){
+            echo 'Unable to write the file';
+        }else{
+            echo 'Successfully write the file';
+        }
+
+
+
+        //SiteName
+
+//        $items = (array)$this->sitelink->reservations_list('L001');
+//
+//        $items = $items['Table'];
+//
+//        $arr_item = array();
+//        foreach ($items as $item){
+//            array_push($arr_item, (array)$item);
+//        }
+
+//        $musawar = array_filter($arr_item, function ($var) {
+//            return ($var['QTRentalTypeID'] == 3);
+//        });
+
+//        $allowed = ['QTRentalTypeID'];
+//        $musawar = array_filter($items['Table'], function ($k) use ($allowed) {
+//            return in_array($k, $allowed);
+//        }, ARRAY_FILTER_USE_KEY);
+
+        //echo json_encode($arr_item[0]);
+
+//        $loc_unite = [];
+//        foreach ($data as $loc){
+//            $items = (array)$this->sitelink->get_more_unit_info($loc['LocationCode']);
+//            $for_item = (isset($items['Table2'])?$items['Table2']:'');
+//            if (!empty($for_item)) {
+//                foreach ($for_item as $row){
+//                    $row_data = (array)$row;
+//                    if (!empty($row_data['UnitID'])) {
+//                        $loc_unite[$loc['LocationCode']][] = $row_data['UnitID'];
+//                    }
+//                }
+//            }
+//        }
+//
+//        echo json_encode($loc_unite);
+
+//        if ( !write_file('api/location.json', json_encode($loc_unite))){
+//            echo 'Unable to write the file';
+//        }
+    }
+    /**
+     * Nazmul
+     */
 	
 	
 	
